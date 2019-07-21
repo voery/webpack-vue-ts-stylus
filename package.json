@@ -1,0 +1,25 @@
+{
+  "name": "webpack-vue-ts-stylus",
+  "version": "1.0.0",
+  "description": "a vuejs project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voery/webpack-vue-ts-stylus.git"
+  },
+  "keywords": [
+    "webpack",
+    "vue",
+    "ts",
+    "stylus"
+  ],
+  "author": "voery_liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voery/webpack-vue-ts-stylus/issues"
+  },
+  "homepage": "https://github.com/voery/webpack-vue-ts-stylus#readme"
+}
