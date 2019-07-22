@@ -187,27 +187,27 @@
             vue-property-decorator是vue-class-component的扩展依赖于它
         ```
     8. 配置shims-vue.d.ts 和 shims-txs.d.ts 文件， 主要用于 TypeScript 识别.vue 文件和txs文件
-        ```js
-            /**
-             * shims-vue.d.ts
-              * 这个文件只做.vue的配置
-            */
-            declare module '*.vue' {
-              import Vue from 'vue'
-              export default Vue
-            }
-            /**
-             * shims-txs.d.ts  如果不使用txs的可以不用配置
-             * 这里是对txs文件的全局配置
-            */
-            import Vue, {VNode} from 'vue'
-            declare global {
-              namespace: JSX {
-                interface Element extends VNode {}
-                interface ElementClass extends Vue {}
-                interface IntrinsicElements {
-                  [elem: string]: any
+            ```js
+                /**
+                 * shims-vue.d.ts
+                  * 这个文件只做.vue的配置
+                */
+                declare module '*.vue' {
+                  import Vue from 'vue'
+                  export default Vue
                 }
-              }
-            }
-        ```
+                /**
+                 * shims-txs.d.ts  如果不使用txs的可以不用配置
+                 * 这里是对txs文件的全局配置
+                */
+                import Vue, {VNode} from 'vue'
+                declare global {
+                  namespace: JSX {
+                    interface Element extends VNode {}
+                    interface ElementClass extends Vue {}
+                    interface IntrinsicElements {
+                      [elem: string]: any
+                    }
+                  }
+                }
+            ```
