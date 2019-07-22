@@ -4,6 +4,8 @@
   "description": "a vuejs project",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode production ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +23,42 @@
   "bugs": {
     "url": "https://github.com/voery/webpack-vue-ts-stylus/issues"
   },
-  "homepage": "https://github.com/voery/webpack-vue-ts-stylus#readme"
+  "homepage": "https://github.com/voery/webpack-vue-ts-stylus#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^3.1.0",
+    "file-loader": "^4.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-loader": "^3.0.0",
+    "px2rem": "^0.5.0",
+    "px2rem-loader": "^0.1.9",
+    "sass": "^1.22.7",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "url-loader": "^2.1.0",
+    "vue-loader": "^15.7.1",
+    "vue-style-loader": "^4.1.2",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.1.0",
+    "vue-property-decorator": "^8.2.1",
+    "vue-router": "^3.0.7",
+    "vuex": "^3.1.1"
+  }
 }
