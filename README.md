@@ -16,7 +16,7 @@
       -  配置loader和plugins
 
     4. 由于使用了typescript这里需要配置tsconfig.json
-        ```javascript
+       ```javascript
             {
               // compilerOptions可以不用配置使用默认配置，这里我们需要配置下
               "compilerOptions": {
@@ -90,7 +90,7 @@
                 "node_modules"
               ]
             }
-        ```
+       ```
     5. 配置postcss.config.js 或 .postcssrc(以JSON或YAML格式创建文件)
         ```javascript
             /**
@@ -187,7 +187,7 @@
             vue-property-decorator是vue-class-component的扩展依赖于它
         ```
     8. 配置shims-vue.d.ts 和 shims-txs.d.ts 文件， 主要用于 TypeScript 识别.vue 文件和txs文件
-            ```js
+       ```js
                 /**
                  * shims-vue.d.ts
                   * 这个文件只做.vue的配置
@@ -196,10 +196,9 @@
                   import Vue from 'vue'
                   export default Vue
                 }
-<<<<<<< HEAD
               }
             }
-        ```
+       ```
     9. 编辑入口文件index.ts
         ```js
             import Vue from 'vue'
