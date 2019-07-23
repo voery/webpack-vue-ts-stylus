@@ -16,7 +16,7 @@
       -  配置loader和plugins
 
     4. 由于使用了typescript这里需要配置tsconfig.json
-       ```javascript
+       ```
             {
               // compilerOptions可以不用配置使用默认配置，这里我们需要配置下
               "compilerOptions": {
