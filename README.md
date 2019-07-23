@@ -34,7 +34,7 @@
                 "experimentalDecorators": true,
                 // 发出”“importstar”“和”“importdefault”“帮助程序以实现运行时babel生态系统兼容性，并启用”“-allowsyntheticdefaultimports”“以实现类型系统兼容性。 默认为false
                 "esModuleInterop": true,
-                // 在 .tsx文件里支持JSX： "React"或 "Preserve" 默认为preserve
+                //  在 .tsx文件里支持JSX： "React"或 "Preserve" 默认为preserve
                 "jsx": "preserve",
                 // 编译过程中需要引入的库文件的列表。 
                 /**
@@ -187,43 +187,31 @@
             vue-property-decorator是vue-class-component的扩展依赖于它
         ```
     8. 配置shims-vue.d.ts 和 shims-txs.d.ts 文件， 主要用于 TypeScript 识别.vue 文件和txs文件
-        ```js
-            /**
-             * shims-vue.d.ts
-              * 这个文件只做.vue的配置
-            */
-            declare module '*.vue' {
-              import Vue from 'vue'
-              export default Vue
-            }
-            /**
-             * shims-txs.d.ts  如果不使用txs的可以不用配置
-             * 这里是对txs文件的全局配置
-            */
-            import Vue, {VNode} from 'vue'
-            declare global {
-              namespace: JSX {
-                interface Element extends VNode {}
-                interface ElementClass extends Vue {}
-                interface IntrinsicElements {
-                  [elem: string]: any
+            ```js
+                /**
+                 * shims-vue.d.ts
+                  * 这个文件只做.vue的配置
+                */
+                declare module '*.vue' {
+                  import Vue from 'vue'
+                  export default Vue
                 }
+<<<<<<< HEAD
               }
             }
         ```
     9. 编辑入口文件index.ts
         ```js
-        import Vue from 'vue'
-        import App from './App.vue'
-        declare module 'vue/types/vue' {
-          interface Vue {
-            // 这里可以定义通过Vue.prototype指定的方法和属性的类型
-            $getApi: any,
-            $axios: any    
-          }
-        }
-
-        new Vue({
-          render: h => h(App)
-        }).$mount('#app')
+            import Vue from 'vue'
+            import App from './App.vue'
+            declare module 'vue/types/vue' {
+              interface Vue {
+                // 这里可以定义通过Vue.prototype指定的方法和属性的类型
+                $getApi: any,
+                $axios: any    
+              }
+            }
+            new Vue({
+              render: h => h(App)
+            }).$mount('#app')
         ```
