@@ -1,6 +1,6 @@
 # webpack-vue-ts-stylus
   1. npm init <br/>
-    创建packkage.json
+    创建packkage.json;
   2. npm i --save-dev webpack webpack-cli ...<br/>
     安装必要的插件
   3. 配置webpack---webpack.config.js
