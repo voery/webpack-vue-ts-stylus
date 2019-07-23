@@ -214,3 +214,148 @@
             render: h => h(App)
           }).$mount('#app')
       ```
+  10. 添加路由，路由添加到router文件夹下。
+      ```js
+          // 这里的路由使用一定的规则来自动加载路由
+          /**
+          * 1. 我们设定路由引入的文件都取至 @/views下的index.vue文件
+          * 2. 将所有文件夹下的index.vue文件路径取出
+          * 3. 遍历查到的路径匹配是否为一级路由的路径， 默认@/views下的第一级文件夹下的index.vue为一级路由
+          * 4. 利用递归遍历添加更深层次的路由
+          */
+          function getRouters (): Array<any> {
+            // 获取所有要引入的路由文件
+            /**
+            * 这里调用require.context需要安装@types/webpack-env 和 @types/node
+            * '@/views' 指定的需要查找文件的根目录
+            * true 是有深度遍历查找
+            * /\/index\.vue$/ 是匹配查找文件
+            * 'lazy' 是查找的方式 可选值 weak eager lazy-once sync lazy
+            */
+            const contexts = require.context("@/views", true, /\/index\.vue$/, "lazy")
+            const routers: Array<any> = []
+            const route: Array<any> = []
+            // 获取所有匹配的文件
+            contexts.keys().forEach(item => {
+              const matchArr = /\/([\s\S]+)?\/index\.vue/g.exec(item)
+              if(!matchArr || !matchArr.length) return
+              routers.push(matchArr[1])
+            })
+            function matchRoute (routers, index = 1){
+              routers = routers.filter(item => {
+                const matchArr = item.split("/");
+                if (matchArr.length == index) {
+                  if (index == 1) {
+                    // 匹配第一层路由
+                    route.push({
+                      path: "/" + item,
+                      name: item
+                        .trim()
+                        .replace(/^[a-zA-Z]/g, (v: String) => v.toUpperCase()),
+                        // 这个import动态导入需要在tsconfig.json中的module的值为esnext或commonjs是才有效
+                      component: () => import(`@/views/${item}/`),
+                      children: []
+                    });
+                  } else {
+                    route.map(map => {
+                      // 这个函数递归调用
+                      mapChild(item, map);
+                    });
+                  }
+                  return null;
+                }
+                return item
+              })
+              
+              if(routers.length > 0){
+                index++
+                matchRoute(routers, index)
+              }
+            }
+            function mapChild (item, map) {
+              if (
+                item.indexOf(map.path.slice(1)) > -1 &&
+                item.split('/').length == map.path.split("/").length
+              ) {
+                map.children.push({
+                  path: "/" + item,
+                  name: item
+                    .slice(item.lastIndexOf("/") + 1)
+                    .trim()
+                    .replace(/^[a-zA-Z]/g, (v: String) => v.toUpperCase()),
+                    // 这个import动态导入需要在tsconfig.json中的module的值为esnext或commonjs是才有效
+                  component: () => import(`@/views/${item}/`),
+                  children: []
+                });
+              } else {
+                map.children.map(map1 => {
+                  // 递归
+                  mapChild(item, map1)
+                })
+              }
+            }
+            matchRoute(routers)
+            
+            return route
+          }
+      ```
+  11. 添加vuex, 创建store文件夹及index.ts文件, 这里需要安装vuex-class
+      ```
+      cnpm i --save-dev vuex-class
+      ```
+      ```js
+      /**
+       * store/index.ts
+      */
+      import Vue from 'vue'
+      import Vuex from 'vuex'
+      // 这里是全局的状态管理
+      import state from './state'
+      import mutations from './mutations'
+      import getters from './getters'
+      import actions from './actions'
+      // 这个是其中一个模块的状态管理
+      import home from './home'
+      Vue.use(Vuex)
+
+      export default new Vuex.Store({
+        state,
+        mutations,
+        getters,
+        actions,
+        modules: {
+          home
+        }
+      })
+      /*
+      * views/home.vue
+      */
+      import { Component, Vue } from 'vue-property-decorator'
+      import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
+      //  namespace的参数为namespaced值
+      const someModule = namespace('home')
+      @Component
+      export default class Home extends Vue {
+        msg: String = 'home'
+        // 这里是vuex的应用
+        // 获取全局的state
+        @State('data') gData
+        // 获取home下的state
+        @State(state => state.home.data ) sData
+        // 通过namespaced获取home下的state
+        @someModule.State('data') hData
+        // 设置全局的状态
+        @Mutation('setData') setGData
+        // 通过namespaced设置home的状态  getters 和 actions与其类似 
+        @someModule.Mutation('setData') setHData
+        // 异步获取全局的state
+        @Getter('getData') getData
+        //  异步设置全局的state
+        @Action('actionsData') actionsData
+        created () {
+          this.actionsData('action')
+          this.setGData('data')
+          this.setHData(['a','b','c'])
+        }
+      }
+      ```
