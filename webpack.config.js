@@ -46,6 +46,7 @@ module.exports = {
     alias: {
       // 主文件文件路径
       '@': path.resolve(__dirname, 'src'),
+      '@views': path.resolve(__dirname, 'src/views'),
       // 静态文件路径
       'assets@': path.resolve(__dirname, 'src/assets')
     }
