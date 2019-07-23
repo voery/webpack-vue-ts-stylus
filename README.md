@@ -36,7 +36,7 @@
                 "esModuleInterop": true,
                 //  在 .tsx文件里支持JSX： "React"或 "Preserve" 默认为preserve
                 "jsx": "preserve",
-                // 编译过程中需要引入的库文件的列表。 
+                // 编译过程中需要引入的库文件的列表。a 
                 /**
                  * 默认注入的库为：
                     针对于--target ES5：DOM，ES5，ScriptHost 
