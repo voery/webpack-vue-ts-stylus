@@ -1,5 +1,5 @@
 export default {
-  getData (state) {
+  getData (state: any) {
     return state.data
   }
 }

@@ -27,8 +27,8 @@ function getRouters (): Array<any> {
     routers.push(matchArr[1])
   })
   console.log('routers', routers)
-  function matchRoute (routers, index = 1){
-    routers = routers.filter(item => {
+  function matchRoute (routers: any, index = 1){
+    routers = routers.filter((item: any) => {
       const matchArr = item.split("/");
       if (matchArr.length == index) {
         if (index == 1) {
@@ -57,7 +57,7 @@ function getRouters (): Array<any> {
       matchRoute(routers, index)
     }
   }
-  function mapChild (item, map) {
+  function mapChild (item: any, map: any) {
     if (
       item.indexOf(map.path.slice(1)) > -1 &&
       item.split('/').length == map.path.split("/").length
@@ -74,7 +74,7 @@ function getRouters (): Array<any> {
         children: []
       });
     } else {
-      map.children.map(map1 => {
+      map.children.map((map1: any) => {
         mapChild(item, map1)
       })
     }

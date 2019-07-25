@@ -4,7 +4,7 @@ const state = {
 const getters = {}
 const actions = {}
 const mutations = {
-  setData (state, value) {
+  setData (state: any, value: any) {
     state.data = value
   }
 }

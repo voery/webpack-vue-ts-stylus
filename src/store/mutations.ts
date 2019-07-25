@@ -1,5 +1,5 @@
 export default {
-  setData (state, value) {
+  setData (state: any, value: any) {
     state.data = value
   }
 }
